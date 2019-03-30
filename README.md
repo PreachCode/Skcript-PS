@@ -19,4 +19,16 @@ So the number of 1s in the subproblem is either x+1 or x-1, both of which is eve
 
 #### Algorithm for strings with odd number of 1s:
 
-The algorithm I propose is as follows: Pick the first one from the left in the string and remove it. 
+The algorithm I propose is as follows: Pick the first 1 from the left in the string and remove it. So this creates two subproblems. The element to the left of 1, is a 0 due to our choice. So now it becomes a 1 and our left subproblem is a sequence of 0s followed by a 1. This is solved by removing the 1 recursively as every time you remove the 1, it creates one more before it. Now continue this algorithm for the right subproblem.
+
+#### Proof for the above algorithm:
+
+We shall prove this as well by induction on the length of the string. 
+
+**Base Case:** Length of string is 1. For a string length of 1, 1 is the only string with odd number of 1s. Clearly the algorithm solves it.
+
+**Induction Hypothesis:** Let all strings of length upto n be solvable using this algorithm. Take a string of length n+1 with odd number of 1s. Pick the first 1 according to the algorithm and remove it. Now the left portion is solvable as I have explained above. Let x be the number of 1s in the right portion originally. After removing the 1, it either becones x+1 or x-1. We know the number of 1s in the string originally was x+1 which is odd. Hence the number of 1s in the right subproblem is also odd, whose solution exists as it is a string of smaller length and has odd number of 1s. Thus the Induction Hypothesis is proved.
+
+#### Time Complexity
+
+The running time for this algorithm is O(n). It takes O(n) to check the parity of number of 1s in the string. The algorithm part also runs in O(n) time. This is because every I start a subproblem, reach the first 1 and come back to the start of problem. Hence each character is visited twice.
